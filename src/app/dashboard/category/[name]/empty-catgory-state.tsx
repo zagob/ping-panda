@@ -5,8 +5,8 @@ import { client } from "@/lib/client"
 import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import SyntaxHighlighter from "react-syntax-highlighter"
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 export const EmptyCategoryState = ({
   categoryName,
@@ -35,7 +35,7 @@ export const EmptyCategoryState = ({
     if (hasEvents) router.refresh()
   }, [hasEvents, router])
 
-  const codeSnippet = `await fetch('https://pingpanda.io/api/events', {
+  const codeSnippet = `await fetch('http://localhost:30001/api/events', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY'
@@ -73,7 +73,7 @@ export const EmptyCategoryState = ({
 
         <SyntaxHighlighter
           language="javascript"
-          style={oneDark}
+          style={atomDark}
           customStyle={{
             borderRadius: "0px",
             margin: 0,
@@ -84,6 +84,26 @@ export const EmptyCategoryState = ({
         >
           {codeSnippet}
         </SyntaxHighlighter>
+      </div>
+
+      <div className="mt-8 flex flex-col items-center space-x-2">
+        <div className="flex items-center gap-2">
+          <div className="size-2 bg-green-500 rounded-full animate-pulse" />
+          <span className="text-sm text-gray-600">
+            Listening to incoming events...
+          </span>
+        </div>
+        <p className="text-sm/6 text-gray-600 mt-2">
+          Need help? Check out our{" "}
+          <a href="#" className="text-blue-600 hover:underline">
+            documentation
+          </a>{" "}
+          or{" "}
+          <a href="#" className="text-blue-600 hover:underline">
+            contact support
+          </a>
+          .
+        </p>
       </div>
     </Card>
   )
